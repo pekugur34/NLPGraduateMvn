@@ -1,6 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,10 +22,11 @@ public class Test {
 		List<WordAnalysis> results=morphology.analyze("şimdilerde");
 		results.forEach(s -> System.out.println(s.formatLong()));
 		
-		int i=8;
 		
-	    /* FileReader fl=new FileReader("DATA.txt");
+	     FileReader fl=new FileReader("DATA.txt");
 	     BufferedReader reader=new BufferedReader(fl);
+	     
+	     
 	     
 	     String text="";
 	     String tempText="";
@@ -57,7 +61,7 @@ public class Test {
 	    
 	    lstTop=counts.entrySet().stream()
 	 	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()) 
-		        .limit(10);*/
+		        .limit(10);
 
 	   // morphologicAnalysis(clearTop(lstTop));
 		
