@@ -17,11 +17,11 @@ import zemberek.morphology.analysis.tr.TurkishMorphology;
 import zemberek.tokenization.TurkishTokenizer;
 
 public class Test {
-	public static void main(String []args) throws IOException {
-		TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
+	public static void main(String []args) throws Exception {
+		/*TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
 		List<WordAnalysis> results=morphology.analyze("şimdilerde");
 		results.forEach(s -> System.out.println(s.formatLong()));
-		
+		*/
 		
 	     FileReader fl=new FileReader("DATA.txt");
 	     BufferedReader reader=new BufferedReader(fl);
@@ -49,27 +49,30 @@ public class Test {
 	     
 	     counts.entrySet().stream()
 	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()) 
-	        .limit(10) 
-	        .forEach(System.out::println); // or any other terminal method
+	        .limit(10) ;
+	        //.forEach(System.out::println); // or any other terminal method
 	     
 	     
 	     Stream<Entry<String,Long>> lstTop=counts.entrySet().stream()
 	 	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()) 
 		        .limit(10);
 	     
-	    clearTop(lstTop);
+	    List<String> clearedTop = clearTop(lstTop);//Temizlenmiş top 10 Liste
 	    
 	    lstTop=counts.entrySet().stream()
 	 	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()) 
 		        .limit(10);
+	    
+	    
 
-	   // morphologicAnalysis(clearTop(lstTop));
+	   
+	    morphologicAnalysis(clearTop(lstTop));
 		
 		
 	}
 	
 	
-	private static void morphologicAnalysis(List<String> topClearedElements) throws Exception {
+	private static void morphologicAnalysis(List<String> topClearedElements) throws Exception {//Yüzdeleme işlemi burda yapılacak...
 		TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
 		List<WordAnalysis> result=morphology.analyze("Fenerbahçe");
 		
@@ -117,7 +120,7 @@ public class Test {
 		    if (value.equals(",")||value.equals("!")||value.equals(".")||value.equals("?")
 		    		||value.equals(":")||value.equals(";")||value.equals("...")
 		    		||value.equals(")")||value.equals("(")||value.equals("“")
-		    		||value.equals("”")) {
+		    		||value.equals("”")||value.equals("'")||value.equals("\"")) {
 		        iterator.remove();
 		    }
 		}
@@ -125,14 +128,19 @@ public class Test {
 	}
 	
 	private static List<String> stopWordsClearing(List<String> text) throws IOException{
-		ArrayList<String> stopWords=readStopWords();
-		for(int i=0;i<text.size();i++) {
-			for(int j=0;j<stopWords.size();j++) {
-				if(text.get(i).equals(stopWords.get(j))) {
-					text.remove(i);
+		try {
+			ArrayList<String> stopWords=readStopWords();
+			for(int i=0;i<text.size();i++) {
+				for(int j=0;j<stopWords.size();j++) {
+					if(text.get(i).equals(stopWords.get(j))) {
+						text.remove(i);
+					}
 				}
 			}
+		}catch(Exception ex) {
+			System.err.println(ex.getMessage());
 		}
+
 		return text;
 	}
 	
