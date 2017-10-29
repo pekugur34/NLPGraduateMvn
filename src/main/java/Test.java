@@ -26,7 +26,7 @@ public class Test {
 	     FileReader fl=new FileReader("DATA.txt");
 	     BufferedReader reader=new BufferedReader(fl);
 	     
-	     
+	     int i=8;
 	     
 	     String text="";
 	     String tempText="";
