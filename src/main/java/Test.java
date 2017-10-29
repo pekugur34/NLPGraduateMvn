@@ -19,6 +19,7 @@ public class Test {
 		List<WordAnalysis> results=morphology.analyze("şimdilerde");
 		results.forEach(s -> System.out.println(s.formatLong()));
 		
+		int i=8;
 		
 	    /* FileReader fl=new FileReader("DATA.txt");
 	     BufferedReader reader=new BufferedReader(fl);
