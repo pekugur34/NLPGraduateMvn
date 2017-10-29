@@ -26,6 +26,10 @@ public class Test {
 	     FileReader fl=new FileReader("DATA.txt");
 	     BufferedReader reader=new BufferedReader(fl);
 	     
+	     // Percentage
+	     long maxNumberOnSet = 10;
+	     double percentageOfMorphology = 0.0;
+	     
 	     int i=8;
 	     
 	     String text="";
@@ -49,19 +53,19 @@ public class Test {
 	     
 	     counts.entrySet().stream()
 	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()) 
-	        .limit(10) ;
+	        .limit(maxNumberOnSet) ;
 	        //.forEach(System.out::println); // or any other terminal method
 	     
 	     
 	     Stream<Entry<String,Long>> lstTop=counts.entrySet().stream()
 	 	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()) 
-		        .limit(10);
+		        .limit(maxNumberOnSet);
 	     
 	    List<String> clearedTop = clearTop(lstTop);//Temizlenmiş top 10 Liste
 	    
 	    lstTop=counts.entrySet().stream()
 	 	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()) 
-		        .limit(10);
+		        .limit(maxNumberOnSet);
 	    
 	    
 
@@ -71,6 +75,12 @@ public class Test {
 		
 	}
 	
+	private static double percentageCheckMorphology(Map<String, Long> counts, long maxNumberOnSet)
+	{
+		
+		
+		return 0.0;
+	}
 	
 	private static void morphologicAnalysis(List<String> topClearedElements) throws Exception {//Yüzdeleme işlemi burda yapılacak...
 		TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
