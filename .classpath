@@ -22,9 +22,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/UGUR PC/Desktop/distributions/0.11.1/dependencies/antlr4-runtime-4.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/UGUR PC/Desktop/distributions/0.11.1/dependencies/args4j-2.0.25.jar"/>
-	<classpathentry kind="lib" path="C:/Users/UGUR PC/Desktop/distributions/0.11.1/dependencies/guava-21.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/UGUR PC/Desktop/distributions/0.11.1/zemberek-all-0.11.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Doga/Desktop/0.11.1/zemberek-all-0.11.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Doga/Desktop/0.11.1/dependencies/antlr4-runtime-4.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Doga/Desktop/0.11.1/dependencies/args4j-2.0.25.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Doga/Desktop/0.11.1/dependencies/guava-21.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
