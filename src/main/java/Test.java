@@ -67,12 +67,8 @@ public class Test {
 	 	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()) 
 		        .limit(maxNumberOnSet);
 	    
-	    
-
 	   
-	    morphologicAnalysis(clearTop(lstTop));
-		
-		
+	    morphologicAnalysis(clearedTop);
 	}
 	
 	private static double percentageCheckMorphology(Map<String, Long> counts, long maxNumberOnSet)
@@ -84,9 +80,14 @@ public class Test {
 	
 	private static void morphologicAnalysis(List<String> topClearedElements) throws Exception {//Yüzdeleme işlemi burda yapılacak...
 		TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
-		List<WordAnalysis> result=morphology.analyze("Fenerbahçe");
+		//List<WordAnalysis> result=morphology.analyze(topClearedElements.toString());
 		
-		result.forEach(s -> System.out.println(s.formatLong()));
+		for(String token:topClearedElements)
+		{
+			System.out.println(morphology.analyze(token));
+		}
+		
+		//result.forEach(s -> System.out.println(s.formatLong()));
 	}
 	
 	private static List<String> clearTop(Stream<Entry<String, Long>> lstTop) {
