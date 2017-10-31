@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -67,11 +68,16 @@ public class Test {
 	 	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()) 
 		        .limit(maxNumberOnSet);
 	    
+	    
 	   
-	    morphologicAnalysis(clearedTop);
+	    morphologicAnalysis(clearTop(lstTop));
+		
+	    
+	    
+		
 	}
 	
-	private static double percentageCheckMorphology(Map<String, Long> counts, long maxNumberOnSet)
+	private static double percentageCheckMorphology()
 	{
 		
 		
@@ -80,14 +86,46 @@ public class Test {
 	
 	private static void morphologicAnalysis(List<String> topClearedElements) throws Exception {//Yüzdeleme işlemi burda yapılacak...
 		TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
-		//List<WordAnalysis> result=morphology.analyze(topClearedElements.toString());
+		//List<WordAnalysis> result=morphology.analyze("Fenerbahçe");	
 		
-		for(String token:topClearedElements)
-		{
-			System.out.println(morphology.analyze(token));
+		int countNoun=0;
+		int countAdj=0;
+		int countnounProp=0;
+		int countVerb=0;
+		
+		for(int i=0;i<topClearedElements.size();i++) {
+			if(topClearedElements.get(i).equals("")) {
+				continue;
+			}else {
+			String s=morphology.analyze(topClearedElements.get(i)).get(0).getDictionaryItem().id.toString();
+			//System.out.println(topClearedElements.get(i));
+			//System.out.println(morphology.analyze(topClearedElements.get(i)).get(0).getDictionaryItem().id.toString());
+			//System.out.println(s.substring(s.indexOf("_")+1));
+		    if(s.substring(s.indexOf("_")+1).equalsIgnoreCase("Noun")) {
+		    	countNoun+=1;
+		    }
+		    else if(s.substring(s.indexOf("_")+1).equalsIgnoreCase("Noun_Prop")){
+		    	countnounProp+=1;
+		    }
+		    else if(s.substring(s.indexOf("_")+1).equalsIgnoreCase("Adj")) {
+		    	countAdj+=1;
+		    }
+		    else if(s.substring(s.indexOf("_")+1).equalsIgnoreCase("Verb")) {
+		    	countVerb+=1;
+		    }
+		    }
 		}
 		
-		//result.forEach(s -> System.out.println(s.formatLong()));
+		int total=countAdj+countNoun+countnounProp+countVerb;
+		
+		double adjRatio=1.0*(countAdj*100)/total;
+		double nounRatio=1.0*(countNoun*100)/total;
+		double nounPropRatio=1.0*(countnounProp*100)/total;
+		double verbRatio=1.0*(countVerb*100)/total;
+		
+		System.out.println("Sıfat Oranı:%"+adjRatio+"\n"+"İsim Oranı:%"+nounRatio
+				+"\n"+"İsim Prop Oranı:%"+nounPropRatio+"\n"+"Fiil Oranı:%"+verbRatio);
+
 	}
 	
 	private static List<String> clearTop(Stream<Entry<String, Long>> lstTop) {
@@ -131,7 +169,8 @@ public class Test {
 		    if (value.equals(",")||value.equals("!")||value.equals(".")||value.equals("?")
 		    		||value.equals(":")||value.equals(";")||value.equals("...")
 		    		||value.equals(")")||value.equals("(")||value.equals("“")
-		    		||value.equals("”")||value.equals("'")||value.equals("\"")) {
+		    		||value.equals("”")||value.equals("'")||value.equals("\"")
+		    		||value.equals(" ")) {
 		        iterator.remove();
 		    }
 		}
