@@ -22,9 +22,60 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Mr. Pek/Desktop/antlr4-runtime-4.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Pek/Desktop/args4j-2.0.25.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Pek/Desktop/guava-21.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Pek/Desktop/zemberek-all-0.11.1.jar"/>
+	<classpathentry kind="lib" path="libs/antlr4-runtime-4.6.jar"/>
+	<classpathentry kind="lib" path="libs/args4j-2.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/com.fasterxml-aalto-xml-0.9.10.jar"/>
+	<classpathentry kind="lib" path="libs/com.fasterxml.jackson.core-jackson-annotations-2.7.8.jar"/>
+	<classpathentry kind="lib" path="libs/com.fasterxml.jackson.core-jackson-core-2.7.8.jar"/>
+	<classpathentry kind="lib" path="libs/com.fasterxml.jackson.core-jackson-databind-2.7.8.jar"/>
+	<classpathentry kind="lib" path="libs/com.fasterxml.jackson.dataformat-jackson-dataformat-xml-2.7.8.jar"/>
+	<classpathentry kind="lib" path="libs/com.fasterxml.jackson.module-jackson-module-jaxb-annotations-2.7.8.jar"/>
+	<classpathentry kind="lib" path="libs/commons-codec-commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="libs/commons-io-commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="libs/commons-logging-commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="libs/guava-21.0.jar"/>
+	<classpathentry kind="lib" path="libs/org.apache.commons-commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="lib" path="libs/org.apache.httpcomponents-httpclient-4.2.6.jar"/>
+	<classpathentry kind="lib" path="libs/org.apache.httpcomponents-httpcore-4.2.5.jar"/>
+	<classpathentry kind="lib" path="libs/org.apache.olingo-odata-client-api-4.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/org.apache.olingo-odata-client-core-4.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/org.apache.olingo-odata-client-proxy-4.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/org.apache.olingo-odata-commons-api-4.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/org.apache.olingo-odata-commons-core-4.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/org.codehaus.woodstox-stax2-api-3.1.4.jar"/>
+	<classpathentry kind="lib" path="libs/org.slf4j-slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="libs/zemberek-all-0.11.1.jar"/>
+	<classpathentry kind="lib" path="libs/hk2-api-2.5.0-b42.jar"/>
+	<classpathentry kind="lib" path="libs/hk2-locator-2.5.0-b42.jar"/>
+	<classpathentry kind="lib" path="libs/hk2-utils-2.5.0-b42.jar"/>
+	<classpathentry kind="lib" path="libs/javassist-3.22.0-CR2.jar"/>
+	<classpathentry kind="lib" path="libs/javax.annotation-api-1.2.jar"/>
+	<classpathentry kind="lib" path="libs/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="libs/javax.inject-2.5.0-b42.jar"/>
+	<classpathentry kind="lib" path="libs/javax.json-1.1.jar"/>
+	<classpathentry kind="lib" path="libs/javax.json-api-1.1.jar"/>
+	<classpathentry kind="lib" path="libs/javax.json.bind-api-1.0.jar"/>
+	<classpathentry kind="lib" path="libs/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="libs/javax.ws.rs-api-2.1.jar"/>
+	<classpathentry kind="lib" path="libs/jaxb-api-2.2.7.jar"/>
+	<classpathentry kind="lib" path="libs/jboss-interceptors-api_1.1_spec-1.0.0.Beta1.jar"/>
+	<classpathentry kind="lib" path="libs/jersey-client.jar"/>
+	<classpathentry kind="lib" path="libs/jersey-common.jar"/>
+	<classpathentry kind="lib" path="libs/jersey-container-servlet-core.jar"/>
+	<classpathentry kind="lib" path="libs/jersey-container-servlet.jar"/>
+	<classpathentry kind="lib" path="libs/jersey-hk2.jar"/>
+	<classpathentry kind="lib" path="libs/jersey-media-jaxb.jar"/>
+	<classpathentry kind="lib" path="libs/jersey-media-json-binding.jar"/>
+	<classpathentry kind="lib" path="libs/jersey-media-sse.jar"/>
+	<classpathentry kind="lib" path="libs/jersey-server.jar"/>
+	<classpathentry kind="lib" path="libs/jsr250-api-1.0.jar"/>
+	<classpathentry kind="lib" path="libs/aopalliance-repackaged-2.5.0-b42.jar"/>
+	<classpathentry kind="lib" path="libs/cdi-api-1.1.jar"/>
+	<classpathentry kind="lib" path="libs/el-api-2.2.jar"/>
+	<classpathentry kind="lib" path="libs/org.osgi.core-4.2.0.jar"/>
+	<classpathentry kind="lib" path="libs/osgi-resource-locator-1.0.1.jar"/>
+	<classpathentry kind="lib" path="libs/persistence-api-1.0.jar"/>
+	<classpathentry kind="lib" path="libs/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="libs/yasson-1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
