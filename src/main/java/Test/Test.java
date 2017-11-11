@@ -1,3 +1,4 @@
+package Test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,14 +18,14 @@ import zemberek.morphology.analysis.WordAnalysis;
 import zemberek.morphology.analysis.tr.TurkishMorphology;
 import zemberek.tokenization.TurkishTokenizer;
 
-public class UgurTest {
+public class Test {
 	public static void main(String []args) throws Exception {
 		/*TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
 		List<WordAnalysis> results=morphology.analyze("şimdilerde");
 		results.forEach(s -> System.out.println(s.formatLong()));
 		*/
 		
-	     FileReader fl=new FileReader("DATA.txt");
+	     FileReader fl=new FileReader("EkonomiData.txt");
 	     BufferedReader reader=new BufferedReader(fl);
 	     
 	     // Percentage
@@ -68,7 +69,7 @@ public class UgurTest {
 	 	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()) 
 		        .limit(maxNumberOnSet);
 	    
-	    
+	    System.out.println(clearedTop);
 	   
 	    morphologicAnalysis(clearTop(lstTop));
 		
@@ -77,17 +78,13 @@ public class UgurTest {
 		
 	}
 	
-	private static double percentageCheckMorphology()
-	{
-		
-		
-		return 0.0;
-	}
+	
 	
 	private static void morphologicAnalysis(List<String> topClearedElements) throws Exception {//Yüzdeleme işlemi burda yapılacak...
 		TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
-		//List<WordAnalysis> result=morphology.analyze("Fenerbahçe");	
+		List<WordAnalysis> result=morphology.analyze("koyun");	
 		
+		System.out.println(result);
 		int countNoun=0;
 		int countAdj=0;
 		int countnounProp=0;
