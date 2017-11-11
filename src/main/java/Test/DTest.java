@@ -1,8 +1,18 @@
+package Test;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -13,22 +23,58 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.olingo.commons.api.data.Entity;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
+import org.glassfish.jersey.server.model.Resource;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import zemberek.morphology.analysis.WordAnalysis;
 import zemberek.morphology.analysis.tr.TurkishMorphology;
 import zemberek.tokenization.TurkishTokenizer;
 
-public class Test {
-	public static void main(String []args) throws Exception {
+
+
+
+public class DTest extends Application{
+	
+	private static Stage primaryStage;
+	private static BorderPane mainLayout;
+	
+	public static void main(String []args)  throws Exception {
 		/*TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
 		List<WordAnalysis> results=morphology.analyze("şimdilerde");
 		results.forEach(s -> System.out.println(s.formatLong()));
 		*/
 		
-	     FileReader fl=new FileReader("DATA.txt");
-	     BufferedReader reader=new BufferedReader(fl);
+	    /* FileReader fl=new FileReader("DATA.txt");
+	     BufferedReader reader=new BufferedReader(fl);*/
 	     
 	     // Percentage
-	     long maxNumberOnSet = 10;
+	    /* long maxNumberOnSet = 10;
 	     double percentageOfMorphology = 0.0;
 	     
 	     int i=8;
@@ -41,7 +87,7 @@ public class Test {
 	     }
 	     reader.close();
 	     
-	     
+	     hurriyetApiClient();
 	     
 	     TurkishTokenizer tokenizer=TurkishTokenizer.DEFAULT;
 	     List<String> tokens=tokenizer.tokenizeToStrings(text);
@@ -70,18 +116,81 @@ public class Test {
 	    
 	    
 	   
-	    morphologicAnalysis(clearTop(lstTop));
+	    morphologicAnalysis(clearTop(lstTop));*/
+	     
+	    //hurriyetApiClient();
 		
-	    
-	    
+		launch(args);
+	   
+		
+		
+	    //wikipediaAPI();
+		
+		
+		
 		
 	}
 	
-	private static double percentageCheckMorphology()
-	{
+	private static void wikipediaAPI() throws UnsupportedEncodingException, IOException, ParseException {
+		String searching = "Mustafa Kemal Atatürk";
+		String encode = "UTF-8";
+		
+		String wikiApiJson="https://tr.wikipedia.org/w/api.php?action=query&prop=extracts&rvprop=content&format=json&titles="+URLEncoder.encode(searching,encode);
+		//
+		HttpURLConnection httpCon=(HttpURLConnection) new URL(wikiApiJson).openConnection();
+		httpCon.addRequestProperty("User-Agent", "Mozilla/5.0");
+		
+		BufferedReader reader=new BufferedReader(new InputStreamReader(httpCon.getInputStream()));
+		
+		String response=reader.lines().collect(Collectors.joining());
+		
+		String a=StringEscapeUtils.unescapeJava(response);
+		
+		//System.out.println(a);
+		
+		reader.close();
 		
 		
-		return 0.0;
+		String result=a.split("\"extract\":\"")[1];
+		//System.out.println(result);
+		
+		Document doc=Jsoup.parse(result);
+		Elements paragraphs=doc.select("p");
+		
+		for(Element p:paragraphs) {
+			System.out.println(p.text());
+			break;
+		}
+		
+	}
+	
+	private static void hurriyetApiClient() throws IOException, ParseException {
+		
+		//Creating the client.
+		Client client = ClientBuilder.newClient();
+		//Targeting the URI.
+		WebTarget target = client.target("https://api.hurriyet.com.tr/v1/articles?$top=5");
+		//Getting response.
+		
+	//	System.out.println(target.request().accept(MediaType.APPLICATION_JSON).header("apikey", "d8fafd060cd14206b23b6cf93b61689d").get(String.class));	
+
+		
+		String s=target.request().accept(MediaType.APPLICATION_JSON).header("apikey", "d8fafd060cd14206b23b6cf93b61689d").get(String.class);
+		
+		JSONParser parser=new JSONParser();
+		
+		JSONArray array=(JSONArray) parser.parse(s);
+	    String[] str=new String[array.size()];
+	    
+	    for(int i=0;i<array.size();i++) {
+	    	JSONObject obj=(JSONObject)array.get(i);
+	    	str[i]=(String) obj.get("Title");
+	    }
+	    
+	    for(String st:str) {
+	    	System.out.println(st);
+	    }
+		    
 	}
 	
 	private static void morphologicAnalysis(List<String> topClearedElements) throws Exception {//Yüzdeleme işlemi burda yapılacak...
@@ -193,5 +302,21 @@ public class Test {
 
 		return text;
 	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
+		this.primaryStage=primaryStage;
+		this.primaryStage.setTitle("Grad Proj");
+		
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(DTest.class.getResource("lul.fxml"));
+		mainLayout=loader.load();
+		Scene scene=new Scene(mainLayout);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	
 	
 }

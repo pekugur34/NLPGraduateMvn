@@ -1,3 +1,4 @@
+package Test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,21 +14,11 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.apache.olingo.commons.api.data.Entity;
-import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
-import org.glassfish.jersey.server.model.Resource;
-
 import zemberek.morphology.analysis.WordAnalysis;
 import zemberek.morphology.analysis.tr.TurkishMorphology;
 import zemberek.tokenization.TurkishTokenizer;
 
-public class DogaTest {
+public class UTest {
 	public static void main(String []args) throws Exception {
 		/*TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
 		List<WordAnalysis> results=morphology.analyze("şimdilerde");
@@ -51,7 +42,7 @@ public class DogaTest {
 	     }
 	     reader.close();
 	     
-	     hurriyetApiClient();
+	     
 	     
 	     TurkishTokenizer tokenizer=TurkishTokenizer.DEFAULT;
 	     List<String> tokens=tokenizer.tokenizeToStrings(text);
@@ -87,15 +78,11 @@ public class DogaTest {
 		
 	}
 	
-	private static void hurriyetApiClient() {
+	private static double percentageCheckMorphology()
+	{
 		
-		//Creating the client.
-		Client client = ClientBuilder.newClient();
-		//Targeting the URI.
-		WebTarget target = client.target("https://api.hurriyet.com.tr/v1/articles?");
-		//Getting response.
-		System.out.println(target.request().accept(MediaType.APPLICATION_JSON).header("apikey", "d8fafd060cd14206b23b6cf93b61689d").get(String.class));
 		
+		return 0.0;
 	}
 	
 	private static void morphologicAnalysis(List<String> topClearedElements) throws Exception {//Yüzdeleme işlemi burda yapılacak...
