@@ -15,6 +15,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
@@ -45,6 +46,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import General.FindPOS;
+import General.StemmingAndLemmatization;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -52,8 +55,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import zemberek.morphology.ambiguity.Z3MarkovModelDisambiguator;
 import zemberek.morphology.analysis.WordAnalysis;
 import zemberek.morphology.analysis.tr.TurkishMorphology;
+import zemberek.morphology.analysis.tr.TurkishSentenceAnalyzer;
 import zemberek.tokenization.TurkishTokenizer;
 
 
@@ -120,19 +125,23 @@ public class DTest extends Application{
 	     
 	    //hurriyetApiClient();
 		
-		launch(args);
+		//launch(args);
 	   
 		
 		
 	    //wikipediaAPI();
 		
-		
+
 		
 		
 	}
-	
+
 	private static void wikipediaAPI() throws UnsupportedEncodingException, IOException, ParseException {
-		String searching = "Mustafa Kemal Atatürk";
+		
+		String searching = "koşma";
+		
+		System.out.println(searching);
+		
 		String encode = "UTF-8";
 		
 		String wikiApiJson="https://tr.wikipedia.org/w/api.php?action=query&prop=extracts&rvprop=content&format=json&titles="+URLEncoder.encode(searching,encode);
