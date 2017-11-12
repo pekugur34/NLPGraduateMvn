@@ -55,19 +55,17 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import zemberek.morphology.ambiguity.Z3MarkovModelDisambiguator;
 import zemberek.morphology.analysis.WordAnalysis;
 import zemberek.morphology.analysis.tr.TurkishMorphology;
 import zemberek.morphology.analysis.tr.TurkishSentenceAnalyzer;
 import zemberek.tokenization.TurkishTokenizer;
 
+import Gui.GuiMain;
 
 
-
-public class DTest extends Application{
-	
-	private static Stage primaryStage;
-	private static BorderPane mainLayout;
+public class DTest{
 	
 	public static void main(String []args)  throws Exception {
 		/*TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
@@ -125,15 +123,9 @@ public class DTest extends Application{
 	     
 	    //hurriyetApiClient();
 		
-		//launch(args);
+		Application.launch(GuiMain.class, args); //Launching GUI
 	   
-		
-		
 	    //wikipediaAPI();
-		
-
-		
-		
 	}
 
 	private static void wikipediaAPI() throws UnsupportedEncodingException, IOException, ParseException {
@@ -311,21 +303,4 @@ public class DTest extends Application{
 
 		return text;
 	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		this.primaryStage=primaryStage;
-		this.primaryStage.setTitle("Grad Proj");
-		
-		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(DTest.class.getResource("lul.fxml"));
-		mainLayout=loader.load();
-		Scene scene=new Scene(mainLayout);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
-
-	
-	
 }
