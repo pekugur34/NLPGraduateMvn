@@ -15,6 +15,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
@@ -45,6 +46,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import General.FindPOS;
+import General.StemmingAndLemmatization;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -52,17 +55,17 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import zemberek.morphology.ambiguity.Z3MarkovModelDisambiguator;
 import zemberek.morphology.analysis.WordAnalysis;
 import zemberek.morphology.analysis.tr.TurkishMorphology;
+import zemberek.morphology.analysis.tr.TurkishSentenceAnalyzer;
 import zemberek.tokenization.TurkishTokenizer;
 
+import Gui.GuiMain;
 
 
-
-public class DTest extends Application{
-	
-	private static Stage primaryStage;
-	private static BorderPane mainLayout;
+public class DTest{
 	
 	public static void main(String []args)  throws Exception {
 		/*TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
@@ -120,19 +123,17 @@ public class DTest extends Application{
 	     
 	    //hurriyetApiClient();
 		
-		launch(args);
+		Application.launch(GuiMain.class, args); //Launching GUI
 	   
-		
-		
 	    //wikipediaAPI();
-		
-		
-		
-		
 	}
-	
+
 	private static void wikipediaAPI() throws UnsupportedEncodingException, IOException, ParseException {
-		String searching = "Mustafa Kemal Atatürk";
+		
+		String searching = "koşma";
+		
+		System.out.println(searching);
+		
 		String encode = "UTF-8";
 		
 		String wikiApiJson="https://tr.wikipedia.org/w/api.php?action=query&prop=extracts&rvprop=content&format=json&titles="+URLEncoder.encode(searching,encode);
@@ -302,21 +303,4 @@ public class DTest extends Application{
 
 		return text;
 	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		this.primaryStage=primaryStage;
-		this.primaryStage.setTitle("Grad Proj");
-		
-		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(DTest.class.getResource("lul.fxml"));
-		mainLayout=loader.load();
-		Scene scene=new Scene(mainLayout);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
-
-	
-	
 }
