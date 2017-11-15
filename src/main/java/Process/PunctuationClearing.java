@@ -1,4 +1,4 @@
-package Processing;
+package Process;
 
 /*
  * Author:Uğur Pek

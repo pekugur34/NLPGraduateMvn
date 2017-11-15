@@ -139,6 +139,7 @@ kendisini
 kez
 ki
 kim
+kimdir
 kime
 kimi
 kimin
