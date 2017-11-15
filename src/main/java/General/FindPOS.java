@@ -41,7 +41,7 @@ public class FindPOS {
                 disambiguator
         );
         new FindPOS(sentenceAnalyzer)
-                .test("Mustafa Kemal Atatürk kimdir?");
+                .test("Kaç tür kuş vardır?");
 
     }
 }

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
@@ -15,8 +16,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import General.StemmingAndLemmatization;
-import Processing.PunctuationClearing;
-import Processing.StopWordsClearing;
+import Process.PunctuationClearing;
+import Process.StopWordsClearing;
+import Search.SearchQuery;
 import zemberek.morphology.analysis.WordAnalysis;
 import zemberek.morphology.analysis.tr.TurkishMorphology;
 import zemberek.tokenization.TurkishTokenizer;
@@ -24,19 +26,32 @@ import zemberek.tokenization.TurkishTokenizer;
 public class UTest {
 	public static void main(String []args) throws Exception {
 		
-		TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
-		new StemmingAndLemmatization(morphology).analyze("koşmak");
+		/*TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
+		StemmingAndLemmatization st=new StemmingAndLemmatization(morphology);
+		
+		
+		String firstQuery="Kuş";
+		
+		String clearedPunc=PunctuationClearing.clearPunc(firstQuery);
+		
+		String []str=clearedPunc.split(" ");
+		
+		String beforeStopWord="";
+		
+		for(int i=0;i<str.length;i++) {
+			st.analyze(str[i]);
+			System.out.println("");
+		}*/
+		
+		System.out.println(SearchQuery.getDataFromPages("Kedi Nedir?"));
+		
+	
 	    
 	}
 	
-	private static double percentageCheckMorphology()
-	{
-		
-		
-		return 0.0;
-	}
 	
-	private static void morphologicAnalysis(List<String> topClearedElements) throws Exception {//Yüzdeleme işlemi burda yapılacak...
+	
+	private static void morphologicAnalysis(List<String> topClearedElements) throws Exception {
 		TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
 		//List<WordAnalysis> result=morphology.analyze("Fenerbahçe");	
 		
@@ -100,9 +115,5 @@ public class UTest {
 		}
 	}
 	
-	
-	
-	
-
 	
 }
