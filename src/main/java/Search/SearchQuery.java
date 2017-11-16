@@ -23,7 +23,7 @@ import org.jsoup.select.Elements;
  * 
  * */
 
-public final class SearchQuery {
+public final class SearchQuery extends Thread {
 	//Fields
 	private static final String SEARCH="https://www.google.com/search";
 	
@@ -80,9 +80,9 @@ public final class SearchQuery {
 		
 	    Document doc=Jsoup.parse(text.toString());
 	    
-	    System.out.println(doc.select("p").text());
+	    System.out.println(doc.select("p").first().text());
 		
-		return useThisURL;
+		return doc.select("p").first().text();
 	}
 	
 	public SearchQuery() {
