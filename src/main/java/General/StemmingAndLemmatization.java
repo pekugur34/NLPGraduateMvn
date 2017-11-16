@@ -22,7 +22,9 @@ public class StemmingAndLemmatization {
             
             System.out.println("\tStems = " + result.getStems().get(0));
             System.out.println(result.formatNoSurface());
-            
+            System.out.println(result.formatOflazer());
+            System.out.println(result.formatOnlyIgs());
+            System.out.println(result.formatNoEmpty());
         }
     }
 }
