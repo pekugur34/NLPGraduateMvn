@@ -43,7 +43,8 @@ public class UTest {
 			System.out.println("");
 		}*/
 		
-		System.out.println(SearchQuery.getDataFromPages("Kedi Nedir?"));
+		System.out.println(SearchQuery.getDataFromPages("atatürk kimdir?"));
+		
 		
 	
 	    

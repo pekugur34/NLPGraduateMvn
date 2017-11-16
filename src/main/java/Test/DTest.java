@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -46,6 +47,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import Domains.Domains;
 import General.FindPOS;
 import General.StemmingAndLemmatization;
 import javafx.application.Application;
@@ -55,19 +57,18 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import zemberek.morphology.ambiguity.Z3MarkovModelDisambiguator;
 import zemberek.morphology.analysis.WordAnalysis;
 import zemberek.morphology.analysis.tr.TurkishMorphology;
 import zemberek.morphology.analysis.tr.TurkishSentenceAnalyzer;
 import zemberek.tokenization.TurkishTokenizer;
 
+import Gui.GuiMain;
+import Search.SearchQuery;
 
 
-
-public class DTest extends Application{
-	
-	private static Stage primaryStage;
-	private static BorderPane mainLayout;
+public class DTest{
 	
 	public static void main(String []args)  throws Exception {
 		/*TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
@@ -123,19 +124,18 @@ public class DTest extends Application{
 	   
 	    morphologicAnalysis(clearTop(lstTop));*/
 	     
-	    //hurriyetApiClient();
+	   // hurriyetApiClient(Domains.getSportUri());	
 		
-		//launch(args);
+		//Launching GUI
+		Application.launch(GuiMain.class, args);  
 	   
-		
-		
 	    //wikipediaAPI();
-		
-
-		
-		
 	}
 
+	
+	
+
+	
 	private static void wikipediaAPI() throws UnsupportedEncodingException, IOException, ParseException {
 		
 		String searching = "koşma";
@@ -173,12 +173,12 @@ public class DTest extends Application{
 		
 	}
 	
-	private static void hurriyetApiClient() throws IOException, ParseException {
+	private static void hurriyetApiClient(String uri) throws IOException, ParseException {
 		
 		//Creating the client.
 		Client client = ClientBuilder.newClient();
 		//Targeting the URI.
-		WebTarget target = client.target("https://api.hurriyet.com.tr/v1/articles?$top=5");
+		WebTarget target = client.target(uri); //Sports news
 		//Getting response.
 		
 	//	System.out.println(target.request().accept(MediaType.APPLICATION_JSON).header("apikey", "d8fafd060cd14206b23b6cf93b61689d").get(String.class));	
@@ -188,17 +188,23 @@ public class DTest extends Application{
 		
 		JSONParser parser=new JSONParser();
 		
-		JSONArray array=(JSONArray) parser.parse(s);
-	    String[] str=new String[array.size()];
-	    
-	    for(int i=0;i<array.size();i++) {
-	    	JSONObject obj=(JSONObject)array.get(i);
-	    	str[i]=(String) obj.get("Title");
-	    }
-	    
-	    for(String st:str) {
-	    	System.out.println(st);
-	    }
+		try {
+			Object obj=parser.parse(s);
+			
+			JSONObject jsonObject=(JSONObject)obj;
+			
+			System.out.println(jsonObject);
+			
+			JSONArray arr=(JSONArray)jsonObject.get("Description");
+			
+			 Iterator<String> iterator = arr.iterator();
+	            while (iterator.hasNext()) {
+	                System.out.println(iterator.next());
+	            }
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		    
 	}
 	
@@ -311,21 +317,4 @@ public class DTest extends Application{
 
 		return text;
 	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		this.primaryStage=primaryStage;
-		this.primaryStage.setTitle("Grad Proj");
-		
-		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(DTest.class.getResource("lul.fxml"));
-		mainLayout=loader.load();
-		Scene scene=new Scene(mainLayout);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
-
-	
-	
 }
