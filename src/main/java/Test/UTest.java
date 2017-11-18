@@ -51,11 +51,15 @@ public class UTest {
 	
 		try {
 			//System.out.println(SearchQuery.getParagraphsFromPages("donanımhaber türkcebilgi"));
-			ScoringSentences.giveScore("mustafa : , ? kemal atatürk kimdir?");
+			ScoringSentences.giveScore("mustafa : , ?  ve ama beni beri benim acaba bazen?");
 		}catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e.getMessage());
 			System.out.println("Üzgünüm bu sorunun cevabını bilmiyorum :(");
+			
 		}
+		
+		
 		
 	    
 	}

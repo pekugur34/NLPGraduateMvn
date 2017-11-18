@@ -1,7 +1,11 @@
 package Process;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
+import zemberek.morphology.analysis.WordAnalysis;
+import zemberek.morphology.analysis.tr.TurkishMorphology;
 import zemberek.tokenization.TurkishTokenizer;
 
 /*
@@ -13,19 +17,19 @@ import zemberek.tokenization.TurkishTokenizer;
 public class ScoringSentences {
 	//Fields
 	private static TurkishTokenizer tokenizer=TurkishTokenizer.DEFAULT;
+	private static TurkishMorphology morphology;
 	
 	//Methods
-	public static double giveScore(String question) {
+	public static double giveScore(String question) throws Exception {
+		
+		morphology=TurkishMorphology.createWithDefaults();
 		
 		ArrayList<String> lstTokenizedQuestion=new ArrayList<String>();
-		
 		String puncCleared=PunctuationClearing.clearPunc(question);
+		String stopWordCleared=StopWordsClearing.clearStopWords(puncCleared);
+		lstTokenizedQuestion=(ArrayList<String>)tokenizer.tokenizeToStrings(stopWordCleared);
 		
-		lstTokenizedQuestion=(ArrayList<String>)tokenizer.tokenizeToStrings(puncCleared);
-		
-		for(String s:lstTokenizedQuestion) {
-			System.out.println(s);
-		}
+		System.out.println(lstTokenizedQuestion);
 		
 		
 		return 0;

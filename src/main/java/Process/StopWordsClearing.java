@@ -29,16 +29,19 @@ public class StopWordsClearing {
 			while((stopWord=reader.readLine())!=null) {
 				stopWords.add(stopWord);
 			}
+			
 			reader.close();
 			List<String> lstText=new ArrayList<>(Arrays.asList(text.split(" ")));
 			
-			for(int i=0;i<lstText.size();i++) {
-				for(int j=0;j<stopWords.size();j++) {
-					if(lstText.get(i).equalsIgnoreCase(stopWords.get(j))) {
-						lstText.remove(i);
-					}
+			
+			
+			for(int i=0;i<stopWords.size();i++) {
+				if(lstText.contains(stopWords.get(i))) {
+					lstText.remove(stopWords.get(i));
 				}
 			}
+			
+			
 			
 			for(String s:lstText) {
 				sb.append(s);

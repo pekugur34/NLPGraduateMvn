@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.util.List;
 
 public class StemmingAndLemmatization {
-    TurkishMorphology morphology;
+    private static TurkishMorphology morphology;
 
     public StemmingAndLemmatization(TurkishMorphology morphology) {
         this.morphology = morphology;
     }
 
-    public void analyze(String word) {
+    public static void analyze(String word) {
         System.out.println("Word = " + word);
 
         System.out.println("Parses: ");
