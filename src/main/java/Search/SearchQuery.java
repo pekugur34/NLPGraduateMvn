@@ -10,6 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,7 +29,7 @@ public final class SearchQuery extends Thread {
 	private static final String SEARCH="https://www.google.com/search";
 	
 	//Methods
-	private static String[] searchQuery(String question) {
+	/*public static String[] searchQuery(String question) {//Old but Gold
 		int resultNumber=10;
 		String query=SEARCH+"?q="+question+"&num="+resultNumber;
 		String[] searchURLs=null;
@@ -41,7 +42,7 @@ public final class SearchQuery extends Thread {
 			int  i=0;
 			for(Element result : results) {
 				searchURLs[i]=result.attr("href").substring(7,result.attr("href").indexOf("&"));
-				//System.out.println(searchURLs[i]);
+				System.out.println(searchURLs[i]);
 				i++;
 			}
 		} catch (IOException e) {
@@ -50,9 +51,73 @@ public final class SearchQuery extends Thread {
 		}
 		
 		return searchURLs;
+	}*/
+	
+	private static ArrayList<String> getURLs(String question){//Better.Takes url from 3 websites.
+		int resultNumber=10;
+		String query=SEARCH+"?q="+question+"&num="+resultNumber;
+		//
+		ArrayList<String> lstURLs=new ArrayList<String>();
+		
+		try {
+			Document doc=Jsoup.connect(query).userAgent("Mozilla/5.0").get();
+			Elements results=doc.select("h3.r > a");
+			//
+			int i=0;
+			
+			String url="";
+			for(Element el:results) {
+				url=el.attr("href").substring(7,el.attr("href").indexOf("&"));
+				if(url.contains("tr.wikipedia")||url.contains("turkcebilgi.com")||url.contains("biyografi.net.tr")) {
+					lstURLs.add(el.attr("href").substring(7,el.attr("href").indexOf("&")));
+				}
+				i++;
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
+		return lstURLs;
+	}
+
+	public static ArrayList<String> getParagraphsFromPages(String question) throws Exception{
+		ArrayList<String> URLsToUse=getURLs(question);
+		ArrayList<String> contents=new ArrayList<String>();
+		
+		
+			for(String url:URLsToUse) {
+				URL page=new URL(url);
+				StringBuffer text=new StringBuffer();
+				HttpURLConnection connection=(HttpURLConnection) page.openConnection();
+				
+				connection.connect();
+				
+				InputStreamReader in=new InputStreamReader((InputStream)connection.getContent());
+				BufferedReader reader=new BufferedReader(in);
+				
+				String line;
+				String cleanedLine;
+				
+			    do {
+			    	line=reader.readLine();
+			    	text.append(line+"\n");
+			    }while(line!=null);
+				
+			    if(text!=null) {
+			    	Document doc=Jsoup.parse(text.toString());
+			    	contents.add(doc.select("p").first().text());
+			    }
+			    
+				
+			}
+		
+
+		
+		return contents;
 	}
 	
-	public static String getDataFromPages(String question) throws IOException {
+	/*public static String getDataFromPages(String question) throws IOException {
 		String[] URLs=searchQuery(question);
 		String useThisURL="";
 		for(String url:URLs) {
@@ -83,7 +148,9 @@ public final class SearchQuery extends Thread {
 	    System.out.println(doc.select("p").first().text());
 		
 		return doc.select("p").first().text();
-	}
+	}*/
+	
+	
 	
 	public SearchQuery() {
 		

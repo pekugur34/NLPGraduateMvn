@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 
 import General.StemmingAndLemmatization;
 import Process.PunctuationClearing;
+import Process.ScoringSentences;
 import Process.StopWordsClearing;
 import Search.SearchQuery;
 import zemberek.morphology.analysis.WordAnalysis;
@@ -43,10 +44,19 @@ public class UTest {
 			System.out.println("");
 		}*/
 		
-		System.out.println(SearchQuery.getDataFromPages("atatürk kimdir?"));
+		//System.out.println(SearchQuery.getDataFromPages("atatürk kimdir?"));
+		//System.out.println(SearchQuery.searchQuery("atatürk kimdir?"));
 		
-		
+		//System.out.println(SearchQuery.getURLs("atatürk kimdir?"));
 	
+		try {
+			//System.out.println(SearchQuery.getParagraphsFromPages("donanımhaber türkcebilgi"));
+			ScoringSentences.giveScore("mustafa : , ? kemal atatürk kimdir?");
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Üzgünüm bu sorunun cevabını bilmiyorum :(");
+		}
+		
 	    
 	}
 	

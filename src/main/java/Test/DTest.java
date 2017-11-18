@@ -133,9 +133,6 @@ public class DTest{
 	}
 
 	
-	
-
-	
 	private static void wikipediaAPI() throws UnsupportedEncodingException, IOException, ParseException {
 		
 		String searching = "koşma";

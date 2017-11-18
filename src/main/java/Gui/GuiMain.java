@@ -69,7 +69,7 @@ public class GuiMain extends Application{
 	
 	@FXML
 	public void onEnter(ActionEvent ae) throws IOException{
-	   String question=myText.getText();
+	  /* String question=myText.getText();
 	   
 	   Thread thread=new Thread(new Runnable() {
 		@Override
@@ -84,7 +84,7 @@ public class GuiMain extends Application{
 			}
 		}
 	});
-	   thread.start();
+	   thread.start();*/
 	}
 
 	

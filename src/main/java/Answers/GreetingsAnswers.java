@@ -1,5 +1,10 @@
 package Answers;
 
+import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
+
+import Questions.GreetingsQuestions;
+
 /*
  * Author:Uğur Pek
  * Created Date:08.11.2017
@@ -15,12 +20,12 @@ public class GreetingsAnswers {
 	//Methods
 	public static String greet(String question){
 		if(Arrays.asList(questionGreetings).contains(question)){
-		      int index=ThreadLocalRandom.current().nextnt(0,greetings.length+1);
+		      int index=ThreadLocalRandom.current().nextInt(0,greetings.length+1);
 		      
 			return greetings[index];
 		}
 		
-		return;
+		return "";
 	}
 	
 	public static String[] getGreetings() {
