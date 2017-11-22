@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 
 import General.StemmingAndLemmatization;
 import Process.PunctuationClearing;
+import Process.ScoringSentences;
 import Process.StopWordsClearing;
 import Search.SearchQuery;
 import zemberek.morphology.analysis.WordAnalysis;
@@ -26,27 +27,24 @@ import zemberek.tokenization.TurkishTokenizer;
 public class UTest {
 	public static void main(String []args) throws Exception {
 		
-		/*TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
-		StemmingAndLemmatization st=new StemmingAndLemmatization(morphology);
-		
-		
-		String firstQuery="Kuş";
-		
-		String clearedPunc=PunctuationClearing.clearPunc(firstQuery);
-		
-		String []str=clearedPunc.split(" ");
-		
-		String beforeStopWord="";
-		
-		for(int i=0;i<str.length;i++) {
-			st.analyze(str[i]);
-			System.out.println("");
-		}*/
-		
-		System.out.println(SearchQuery.getDataFromPages("atatürk kimdir?"));
-		
-		
+		TurkishMorphology morphology=TurkishMorphology.createWithDefaults();
+		TurkishTokenizer tokenizer=TurkishTokenizer.DEFAULT;
 	
+		try {
+			//System.out.println(SearchQuery.getParagraphsFromPages("donanımhaber türkcebilgi"));
+			//System.out.println(ScoringSentences.giveScore("mustafa : , ?  ve ama beni beri benim acaba bazen?",morphology,tokenizer));
+
+			System.out.println(ScoringSentences.stems("jeanne d'arc kaç yılında doğmuştur?",morphology,tokenizer));
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			System.out.println("Üzgünüm bu sorunun cevabını bilmiyorum :(");
+			
+		}
+		
+		
+		
 	    
 	}
 	
