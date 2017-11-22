@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import General.StemmingAndLemmatization;
 import zemberek.morphology.analysis.WordAnalysis;
 import zemberek.morphology.analysis.tr.TurkishMorphology;
 import zemberek.tokenization.TurkishTokenizer;
@@ -15,24 +16,38 @@ import zemberek.tokenization.TurkishTokenizer;
  * */
 
 public class ScoringSentences {
-	//Fields
-	private static TurkishTokenizer tokenizer=TurkishTokenizer.DEFAULT;
-	private static TurkishMorphology morphology;
 	
 	//Methods
-	public static double giveScore(String question) throws Exception {
+	public static double giveScore(String question,TurkishMorphology morphology,TurkishTokenizer tokenizer) throws Exception {
 		
-		morphology=TurkishMorphology.createWithDefaults();
+		String pClearedQuestion=PunctuationClearing.clearPunc(question);
 		
-		ArrayList<String> lstTokenizedQuestion=new ArrayList<String>();
-		String puncCleared=PunctuationClearing.clearPunc(question);
-		String stopWordCleared=StopWordsClearing.clearStopWords(puncCleared);
-		lstTokenizedQuestion=(ArrayList<String>)tokenizer.tokenizeToStrings(stopWordCleared);
+		List<String> lstTokenized=tokenizer.tokenizeToStrings(pClearedQuestion);
 		
-		System.out.println(lstTokenizedQuestion);
 		
+		System.out.println(lstTokenized);
 		
 		return 0;
 	}
+	
+
+	
+	public static List<String> stems(String question,TurkishMorphology morphology,TurkishTokenizer tokenizer){
+		String punc=PunctuationClearing.clearPunc(question);//Punctuation Clearing
+		String stop=StopWordsClearing.clearStopWords(punc);//StopWord Clearing
+		
+		List<String> tokenized=tokenizer.tokenizeToStrings(stop);
+		
+		List<String> stems=new ArrayList<>();
+		for(String tokens:tokenized) {
+			stems.add(StemmingAndLemmatization.analyze(tokens,morphology));//Stemming
+		}
+		
+		return stems;
+	}
+	
+	
+	
+	
 	
 }//end of class
