@@ -29,6 +29,8 @@
             </Button>
             <Button mnemonicParsing="false" onMouseClicked="#maximizeWindowButton" text="Maximize" />
           <Button mnemonicParsing="false" onMouseClicked="#closeWindowButton" text="Close" />
+            <Button mnemonicParsing="false" onMouseClicked="#sportButtonClicked" text="Sport" />
+            <Button mnemonicParsing="false" onMouseClicked="#factoidButtonClicked" text="Factoid" />
         </buttons>
          <effect>
             <Blend opacity="0.7" />

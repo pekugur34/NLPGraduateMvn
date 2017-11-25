@@ -15,6 +15,9 @@ public class Domains {
 	private static final String economyURI="https://api.hurriyet.com.tr/v1/pages/556c3d006534821a54c671e5?";
 	private static final String techURI="https://api.hurriyet.com.tr/v1/pages/556c6a756534851a54c5a6cc?";
 	
+	public static final String[] domainQuestions= {"Son günlerde neler oldu?","Gündemde neler var?","Ne haberler var?","Neler oluyor?"
+			,"Gündemden biraz uzak kaldım","Son olanlarla ilgili bilgi verir misin?"};
+	
 	//Methods
 	public static String getSportUri() {
 		return sportURI;

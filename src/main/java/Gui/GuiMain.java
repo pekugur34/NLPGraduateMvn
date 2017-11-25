@@ -1,7 +1,16 @@
 package Gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+import Answers.GreetingsAnswers;
+import Domains.Domains;
+import Questions.GreetingsQuestions;
+import Questions.SportQuestions;
 import Search.SearchQuery;
 import Test.DTest;
 import javafx.application.Application;
@@ -9,8 +18,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -26,6 +37,9 @@ public class GuiMain extends Application{
 	private static Stage primaryStage;
 	private static BorderPane mainLayout;
 	
+	private static boolean isSport=true;
+	private static boolean isFactoid=false;
+	
 	@FXML
 	private TextField myText;
 	
@@ -40,9 +54,15 @@ public class GuiMain extends Application{
 	private static double initialHeight;
 	private static boolean isWindowMaximized = false;
 	
+	private List<Label> messages=new ArrayList<Label>();
+	private static int index=0;
+	
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
 	
+	//From Question and Answer Part
+	private static String[] greetingsQuestions;
+	private static String[] greetingsAnswers;
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -50,6 +70,8 @@ public class GuiMain extends Application{
 				this.primaryStage=primaryStage;
 				this.primaryStage.setTitle("Grad Proj");
 				
+				greetingsQuestions=GreetingsQuestions.getGreetings();
+				greetingsAnswers=GreetingsAnswers.getGreetings();
 				
 				FXMLLoader loader=new FXMLLoader();
 				loader.setLocation(GuiMain.class.getResource("view/MyView.fxml"));
@@ -69,24 +91,58 @@ public class GuiMain extends Application{
 	
 	@FXML
 	public void onEnter(ActionEvent ae) throws IOException{
-	  /* String question=myText.getText();
+	   String question=myText.getText();
+	   String[] domainQuestions=Domains.domainQuestions;
+	   
+	   messages.add(new Label(question));
+	   messages.get(index).setAlignment(Pos.CENTER_LEFT);
+	   index++;
 	   
 	   Thread thread=new Thread(new Runnable() {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
 			try {
-				String answer=SearchQuery.getDataFromPages(question);
-				txtAnswer.setText(answer);
-			} catch (IOException e) {
+				if(isSport) {
+					if(ArrayUtils.contains(greetingsQuestions, question)) {
+						Random rnd=new Random();
+						int rn=rnd.nextInt(greetingsAnswers.length);
+						//txtAnswer.setText(greetingsAnswers[rn]);
+						messages.add(new Label(greetingsAnswers[rn]));
+						messages.get(index).setAlignment(Pos.CENTER_RIGHT);
+						index++;
+					}else if(ArrayUtils.contains(domainQuestions,question)){
+						//txtAnswer.setText(SportQuestions.getJSON());
+						messages.add(new Label(SportQuestions.getJSON()));
+						messages.get(index).setAlignment(Pos.CENTER_RIGHT);
+						index++;
+					}
+				}
+				if(isFactoid) {
+					txtAnswer.setText(SearchQuery.getParagraphsFromPages(question).toString());
+				}
+				
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	});
-	   thread.start();*/
+	   thread.start();
 	}
-
+	
+	@FXML
+	public void factoidButtonClicked(MouseEvent event) {
+		isSport=false;
+		isFactoid=true;
+	}
+	
+	@FXML
+	public void sportButtonClicked(MouseEvent event) {
+		isFactoid=false;
+		isSport=true;
+		
+	}
 	
 	@FXML
 	public void minimizeWindowButton(MouseEvent event) {

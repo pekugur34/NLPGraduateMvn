@@ -68,8 +68,10 @@ public final class SearchQuery extends Thread {
 			String url="";
 			for(Element el:results) {
 				url=el.attr("href").substring(7,el.attr("href").indexOf("&"));
-				if(url.contains("tr.wikipedia")||url.contains("turkcebilgi.com")||url.contains("biyografi.net.tr")) {
-					lstURLs.add(el.attr("href").substring(7,el.attr("href").indexOf("&")));
+				if(url.contains("tr.wikipedia")||url.contains("turkcebilgi.com")||url.contains("biyografi.net.tr")
+						||url.contains("www.msxlabs.org")) {
+					String tempURL=java.net.URLDecoder.decode(url,"UTF-8");
+					lstURLs.add(tempURL);
 				}
 				i++;
 			}
@@ -111,8 +113,6 @@ public final class SearchQuery extends Thread {
 			    
 				
 			}
-		
-
 		
 		return contents;
 	}
