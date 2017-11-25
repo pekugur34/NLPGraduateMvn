@@ -65,6 +65,7 @@ import zemberek.morphology.analysis.tr.TurkishSentenceAnalyzer;
 import zemberek.tokenization.TurkishTokenizer;
 
 import Gui.GuiMain;
+import Questions.SportQuestions;
 import Search.SearchQuery;
 
 
@@ -129,6 +130,8 @@ public class DTest{
 		//Launching GUI
 		Application.launch(GuiMain.class, args);  
 	   
+		//System.out.println(SportQuestions.getJSON());
+		
 	    //wikipediaAPI();
 	}
 

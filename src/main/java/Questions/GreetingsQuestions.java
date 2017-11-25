@@ -8,7 +8,7 @@ package Questions;
 public class GreetingsQuestions {
 	//Members
 	private static final String[] greetings= {"selam","slm","selamlar","merhaba","merhabalar","mrb"
-			,"nasılsın?","nasıl gidiyor?","naber?","nbr?"};
+			,"naber?","nbr?"};
 	private static final String[] endings= {"Görüşmek üzere","görüşürüz","güle güle","grşrz","Hoşçakal"};
 	
 	//Methods

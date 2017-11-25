@@ -12,25 +12,30 @@ import java.io.IOException;
 
 public class FindPOS {
 
-    TurkishSentenceAnalyzer analyzer;
 
     public FindPOS(TurkishSentenceAnalyzer analyzer) {
-        this.analyzer = analyzer;
+        
     }
 
-    public void test(String s) {
-        System.out.println("Sentence  = " + s);
+    public static String test(String s,TurkishSentenceAnalyzer analyzer) {
+        //System.out.println("Sentence  = " + s);
         SentenceAnalysis analysis = analyzer.analyze(s);
         analyzer.disambiguate(analysis);
 
 
         for (SentenceAnalysis.Entry entry : analysis) {
             WordAnalysis wa = entry.parses.get(0);
-            Log.info("%s -> %s : %s ",
+            String prop=wa.dictionaryItem.secondaryPos.toString();
+            /*Log.info("%s -> %s : %s ",
                     entry.input,
                     wa.dictionaryItem.primaryPos,
-                    wa.dictionaryItem.secondaryPos);
+                    wa.dictionaryItem.secondaryPos);*/
+            if(prop.equalsIgnoreCase("ProperNoun")) {
+            	//System.out.println(entry.input);
+            	return entry.input;
+            }
         }
+        return null;
     }
 
     public static void main(String[] args) throws IOException {
@@ -40,8 +45,7 @@ public class FindPOS {
                 morphology,
                 disambiguator
         );
-        new FindPOS(sentenceAnalyzer)
-                .test("Kaç tür kuş vardır?");
+  
 
     }
 }
