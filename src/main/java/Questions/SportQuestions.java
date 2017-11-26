@@ -35,38 +35,33 @@ public class SportQuestions extends Domains{
 		
 		String s=target.request().accept(MediaType.APPLICATION_JSON).header("apikey", "d8fafd060cd14206b23b6cf93b61689d").get(String.class);
 		
-		JSONParser parser=new JSONParser();
+		JSONParser parser=new JSONParser();//Parser
 		
-		Object obj=parser.parse(s);
+		Object obj=parser.parse(s);//Parsing string to json object
 		
-		JSONObject jsonObject = (JSONObject) obj;
+		JSONObject jsonObject = (JSONObject) obj;//Main json object
 		
-		JSONArray arr=(JSONArray) jsonObject.get("PageNews");
 		
-		JSONObject desc=(JSONObject)arr.get(1);
-		//JSONArray file=(JSONArray) arr.get(11);
+
+		JSONArray pageNews=(JSONArray) jsonObject.get("PageNews");//Page news array
+		JSONObject desc=(JSONObject)pageNews.get(1);//Description part taken
 		
-	    //JSONObject photo=(JSONObject) file.get(0);
-	    //System.out.println(photo);
+		JSONObject files=(JSONObject)pageNews.get(11);//Files part taken
 		
-		JSONArray files=(JSONArray) jsonObject.get(11);
+		JSONArray filesArr=(JSONArray)files.get("Files");//Files part is an array
 		
-		System.out.println(files);
-	
-		
-		//JSONObject photo=(JSONObject) files.get(0);
-		
-		//System.out.println(photo);
 		
 		for(int i=0;i<5;i++) {
-			JSONObject temp=(JSONObject) arr.get(i);
-			//System.out.println(temp.get("Title")+""+temp.get("FileUrl"));
+			JSONObject temp=(JSONObject) pageNews.get(i);
+			JSONObject tmp=(JSONObject) filesArr.get(i);//Url of image
 			
+			System.out.println(temp.get("Title")+""+temp.get("Url"));
+			System.out.println(tmp.get("FileUrl"));
 			
 		}
 		
 
-		return desc.get("Url").toString();
+		return "";
 	}
 	
 	public static void main(String[] args) {
