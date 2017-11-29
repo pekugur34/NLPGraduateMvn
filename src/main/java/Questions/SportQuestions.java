@@ -30,6 +30,9 @@ public class SportQuestions extends Domains{
 	public static String getJSON() throws Exception{
 		String URI=getSportUri();
 		
+		//
+		String ss="";
+		
 		Client client=ClientBuilder.newClient();
 		WebTarget target=client.target(URI);
 		
